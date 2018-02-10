@@ -7,11 +7,14 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node index.js"
 	},
-	"author": "omegryth",
+	"author": {
+		"name": "OctoMeep",
+		"email": "roboneleven@gmail.com"
+	}, 
 	"contributors": [
 		{
-			"name": "OctoMeep",
-			"email": "roboneleven@gmail.com"
+			"name": "Algry",
+			"email": "irongeardragon135@gmail.com"
 		}
 	],
 	"license": "ISC",
