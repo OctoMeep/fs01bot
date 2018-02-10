@@ -1,5 +1,5 @@
 {
-	"name": "discord_bot",
+	"name": "fs01bot",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
@@ -8,6 +8,12 @@
 		"start": "node index.js"
 	},
 	"author": "omegryth",
+	"contributors": [
+		{
+			"name": "OctoMeep",
+			"email": "roboneleven@gmail.com"
+		}
+	],
 	"license": "ISC",
 	"dependencies": {
 		"discord.js": "^11.3.0"
