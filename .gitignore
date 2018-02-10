@@ -1,0 +1,5 @@
+node_modules/
+storyFiles/
+story.md
+config.json
+.DS_Store
