@@ -29,6 +29,7 @@ client.on('message', message => {
 			!(
 				message.content.startsWith("!")
 				|| message.content.startsWith("[")
+				|| message.content.startsWith("{")
 			)
 		) return;
 	if (!session.active&&!(message.content.startsWith("!activate")||message.content.startsWith("!report"))) return message.channel.send("The bot is currently inactive");
@@ -43,11 +44,14 @@ client.on('message', message => {
 			if (message.content.startsWith("!")) commands.parseCommand(message, turnorderKeep, session);
 			else if (message.content.startsWith("[")&&message.content.includes("]: ")) moves.parseMove(message, turnorderKeep);
 			else if (
-				message.content.startsWith("{")&&message.content.includes("}: ") ||
-				(message.content.startsWith("[")&&message.content.includes("]: ") && message.channel.name === "arena") // TODO: Delet this
+				(message.content.startsWith("{")&&message.content.includes("}: ")&&!message.content.endsWith("(shout)"))
+				|| (message.content.startsWith("[")&&message.content.includes("]: ") && message.channel.name === "arena") // TODO: Delet this
 			) {
 				moves.parseMove(message, turnorderKeep);
-				message.guild.channels.filter(channel=>message.channel.id!==channel.id&&utilities.checkDistance(message.channel, channel)&&utilities.isRPChannel(channel)).forEach(channel=>{ //Stupidness ensues due to lots of channels being highly inefficient
+				message.guild.channels.filter(channel => {
+					console.log(channel.name, channel.topic);
+					return message.channel.id!==channel.id&&utilities.isRPChannel(channel)&&utilities.checkDistance(message.channel, channel)
+				}).forEach(channel=>{ //Stupidness ensues due to lots of channels being highly inefficient
 					console.log(channel);
 					channel.send(message.content + " (shout)");
 				});
