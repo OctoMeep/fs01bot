@@ -42,7 +42,10 @@ client.on('message', message => {
 			var turnorderKeep = JSON.parse(content);
 			if (message.content.startsWith("!")) commands.parseCommand(message, turnorderKeep, session);
 			else if (message.content.startsWith("[")&&message.content.includes("]: ")) moves.parseMove(message, turnorderKeep);
-			else if (message.content.startsWith("{")&&message.content.includes("}: ")) {
+			else if (
+				message.content.startsWith("{")&&message.content.includes("}: ") ||
+				(message.content.startsWith("[")&&message.content.includes("]: ") && message.channel.name === "arena") // TODO: Delet this
+			) {
 				moves.parseMove(message, turnorderKeep);
 				message.guild.channels.filter(channel=>message.channel.id!==channel.id&&utilities.checkDistance(message.channel, channel)&&utilities.isRPChannel(channel)).forEach(channel=>{ //Stupidness ensues due to lots of channels being highly inefficient
 					console.log(channel);
