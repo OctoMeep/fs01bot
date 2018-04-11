@@ -60,27 +60,3 @@ client.on('message', message => {
 		else messageForms();
 	});
 });
-
-const move = (message, turnorderKeep)=> {
-	fs.appendFile("./story.md", message.content + "\n\n", err=>{
-		if (err) throw err;
-		else message.channel.send(":+1:");
-	});
-}
-
-const command = (message, turnorderKeep)=> {
-	const args = message.content.split(" ");
-	const gm = message.guild.roles.find("name", "[GM]");
-	switch(args[0]){
-		case "!report":
-			const user = args[1];
-			if (!user.startsWith("<@")) {
-				message.reply("Sorry, did you miss a mention?");
-				return;
-			}
-			else 
-			client.channels.get("401806428228026371").send(message.guild.roles.find("name", "Moderators").toString() + ", " + user + " has been reported for " + args.slice(2).join(" "))
-			break;
-	};
-	message.delete();
-};

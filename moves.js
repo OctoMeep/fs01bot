@@ -11,7 +11,7 @@ exports.parseMove = (message, channelSettings) => {
     else throw new Error("That message is neither move nor shout");
 	if (channelSettings.turnorder === [] && channelSettings.enforceturns) return message.channel.send("The turn order has not been set yet!");
 
-var charTag = message.content.slice(0, message.content.indexOf(isShout?"}: ":"]: ") + 1).replace("{", "[").replace("}", "]");
+	var charTag = message.content.slice(0, message.content.indexOf(isShout?"}: ":"]: ") + 1).replace("{", "[").replace("}", "]");
         
     var role = message.guild.roles.find("name", charTag);
     
