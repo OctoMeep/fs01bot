@@ -147,6 +147,21 @@ exports.parseCommand = (message, channelSettings, session) => {
 			
 			doMove(member, battleRoom, message.channel);
 		})
+	} else if (message.content.startsWith("!sendback")) {
+		message.guild.members.forEach(member => {
+			var returnRoom;
+			if (member.roles.some(role => role.name === "fighter")) {
+				const dormRole = member.roles.find(val => val.name.startsWith("d-"));
+				if (!dormRole) return;
+				returnRoom = message.guild.channels.find("name", "dorm-" + dormRole.name.slice(2));
+			} else {
+				const dormRole = member.roles.find(val => val.name.startsWith("d-"));
+				if (!dormRole) return;
+				returnRoom = message.guild.channels.find("name", "dorm-" + dormRole.name.slice(2));
+			}
+			
+			doMove(member, returnRoom, message.channel);
+		})
 	}
 	const path = config.filepath + message.guild.id + "/meta/" + message.channel.name + ".json";
 	console.log(path);
